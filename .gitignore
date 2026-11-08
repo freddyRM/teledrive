@@ -1,0 +1,14 @@
+# Secretos: nunca subir a Git
+.env
+**/.env
+*.jks
+*.keystore
+key.properties
+local.properties
+
+# Archivos de prueba locales
+pruebas/
+
+# Compilados y caches
+**/build/
+**/.dart_tool/
