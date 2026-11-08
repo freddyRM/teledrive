@@ -4,10 +4,45 @@ Esta guía lleva de cero a una app funcionando en tu Android. Usa tu propia cuen
 
 ## 1. Lo que necesitas
 
+**Cuenta y teléfono:**
 - Una cuenta de Telegram con tu número (la app de Telegram instalada en el celular).
-- Un computador con Windows, Flutter y el SDK de Android (lo que ya configuramos en el proyecto).
-- Un cable USB para el teléfono, con la **depuración USB** activada.
-- Unos 15 minutos.
+- Un teléfono Android 8.0 o superior, con la **depuración USB** activada y un cable USB.
+- Unos 15 minutos para la configuración inicial.
+
+**Computador (Windows 10/11) para compilar la app:**
+
+| Herramienta | Versión usada | Para qué |
+|---|---|---|
+| Flutter (canal stable) | 3.47.9 | Compilar la app |
+| Dart | 3.13.x (viene con Flutter) | Lenguaje de la app |
+| Android SDK | platform `android-36`, build-tools `36.1.0` | Compilar y instalar en el teléfono |
+| JDK | 21 (el que trae Android Studio) | Gradle |
+| Android Studio | cualquier versión reciente | Trae el JDK y el SDK; puedes usarlo solo como instalador |
+| Git | cualquier versión reciente | Clonar el repositorio |
+| adb | viene con el SDK (`platform-tools`) | Instalar el APK en el teléfono |
+
+Verifica la instalación con:
+
+```bash
+flutter doctor -v
+```
+
+Todo lo marcado con ✓ debe estar bien. Lo importante: **Flutter**, **Android toolchain** y el teléfono listado en "Connected devices".
+
+**Solo si quieres recompilar TDLib** (no hace falta para usar la app):
+- WSL Ubuntu, con `cmake`, `ninja-build` y `g++`.
+- Android NDK r28c (Linux).
+- Ver `tools/tdlib/README.md`.
+
+**Lo que ya viene en el repositorio:**
+- `app/android/app/src/main/jniLibs/arm64-v8a/libtdjson.so`: la librería de TDLib ya compilada (unos 33 MB). Por eso no necesitas WSL para compilar la app.
+- `tools/tdlib/`: los scripts para recompilarla.
+
+Si `flutter doctor` no encuentra el JDK, indícale el de Android Studio:
+
+```bash
+flutter config --jdk-dir="C:\Program Files\Android\Android Studio\jbr"
+```
 
 > **Importante:** tus datos de acceso (`api_id`, `api_hash`) son privados. No los pegues en chats, capturas, correos ni repositorios públicos. Si alguna vez se exponen, regenéralos en my.telegram.org.
 
