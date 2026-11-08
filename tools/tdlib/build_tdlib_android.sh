@@ -1,7 +1,9 @@
+# Configuracion: TDLIB_ROOT (por defecto $HOME) y NDK se pueden cambiar con variables de entorno.
+ROOT="${TDLIB_ROOT:-$HOME}"
+NDK="${NDK:-$ROOT/android-ndk/android-ndk-r28c}"
 #!/bin/bash
 set -e
-NDK=/root/android-ndk/android-ndk-r28c
-cd /root/td
+cd $ROOT/td
 rm -rf build-android
 mkdir build-android
 cd build-android
@@ -11,16 +13,16 @@ cmake -G Ninja \
   -DANDROID_PLATFORM=android-24 \
   -DANDROID_STL=c++_static \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX:PATH=/root/td-android \
+  -DCMAKE_INSTALL_PREFIX:PATH=$ROOT/td-android \
   -DTD_ENABLE_JNI=OFF \
   -DTD_GENERATE_SOURCE_FILES=OFF \
-  -DOPENSSL_ROOT_DIR=/root/openssl-android \
+  -DOPENSSL_ROOT_DIR=$ROOT/openssl-android \
   -DOPENSSL_USE_STATIC_LIBS=ON \
-  -DOPENSSL_INCLUDE_DIR=/root/openssl-android/include \
-  -DOPENSSL_CRYPTO_LIBRARY=/root/openssl-android/lib/libcrypto.a \
-  -DOPENSSL_SSL_LIBRARY=/root/openssl-android/lib/libssl.a \
-  .. > /root/android-config.log 2>&1
+  -DOPENSSL_INCLUDE_DIR=$ROOT/openssl-android/include \
+  -DOPENSSL_CRYPTO_LIBRARY=$ROOT/openssl-android/lib/libcrypto.a \
+  -DOPENSSL_SSL_LIBRARY=$ROOT/openssl-android/lib/libssl.a \
+  .. > $ROOT/android-config.log 2>&1
 echo "config_exit=$?"
-ninja -j"$(nproc)" tdjson > /root/android-build.log 2>&1
+ninja -j"$(nproc)" tdjson > $ROOT/android-build.log 2>&1
 echo "build_exit=$?"
-find /root/td/build-android -name 'libtdjson*.so' -exec ls -la {} \;
+find $ROOT/td/build-android -name 'libtdjson*.so' -exec ls -la {} \;

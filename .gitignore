@@ -15,3 +15,6 @@ pruebas/
 
 # Documento interno: no se sube al repositorio
 RESUMEN_PROYECTO.md
+
+# Binario de TDLib: se descarga desde la Release (tools/fetch_tdlib.ps1)
+app/android/app/src/main/jniLibs/arm64-v8a/libtdjson.so
