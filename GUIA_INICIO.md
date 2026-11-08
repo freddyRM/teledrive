@@ -35,7 +35,7 @@ Todo lo marcado con ✓ debe estar bien. Lo importante: **Flutter**, **Android t
 - Ver `tools/tdlib/README.md`.
 
 **Lo que ya viene en el repositorio:**
-- `app/android/app/src/main/jniLibs/arm64-v8a/libtdjson.so`: la librería de TDLib ya compilada (unos 33 MB). Por eso no necesitas WSL para compilar la app.
+- La librería de TDLib (`libtdjson.so`, unos 33 MB) **no está en Git**. Se descarga desde la Release del repositorio con `tools/fetch_tdlib.ps1` (paso 6). Por eso no necesitas WSL para compilar la app.
 - `tools/tdlib/`: los scripts para recompilarla.
 
 Si `flutter doctor` no encuentra el JDK, indícale el de Android Studio:
@@ -104,6 +104,14 @@ TG_CHANNEL_ID=-1001234567890
 > La frase maestra no va en `.env`: se configura dentro de la app (ver paso 8).
 
 ## 6. Compilar e instalar en el teléfono
+
+0. Descarga la librería de TDLib desde la raíz del proyecto (solo la primera vez, o cuando cambie la versión):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools\fetch_tdlib.ps1
+```
+
+   Debe terminar con el SHA-256 verificado. Si la descarga falla, revisa tu conexión.
 
 1. Activa la **depuración USB** en el teléfono y acepta el permiso cuando lo conectes.
 2. Desde la carpeta `app`, compila pasando los datos del `.env`. Con los valores reales:
