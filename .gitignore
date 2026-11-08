@@ -12,3 +12,6 @@ pruebas/
 # Compilados y caches
 **/build/
 **/.dart_tool/
+
+# Documento interno: no se sube al repositorio
+RESUMEN_PROYECTO.md
